@@ -38,10 +38,6 @@ resource "tls_private_key" "ssh-key" {
 resource "google_compute_instance" "hashicat" {
   name         = "${var.prefix}-hashicat"
   zone         = "${var.region}-b"
-  tags           = {
-    bilable      = "true"
-    department = "devops"
-  }
   machine_type = var.machine_type
 
   boot_disk {
@@ -60,7 +56,10 @@ resource "google_compute_instance" "hashicat" {
     ssh-keys = "ubuntu:${chomp(tls_private_key.ssh-key.public_key_openssh)} terraform"
   }
 
-  tags = ["http-server"]
+  tags = ["http-server"
+   billable = "true"
+   department = "devops"
+  ]
 
 }
 
