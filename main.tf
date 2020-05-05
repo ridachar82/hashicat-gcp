@@ -56,12 +56,7 @@ resource "google_compute_instance" "hashicat" {
     ssh-keys = "ubuntu:${chomp(tls_private_key.ssh-key.public_key_openssh)} terraform"
   }
 
-  tags = ["http-server",
-   billable = "true",
-   department = "devops"
-  ]
-
-}
+  tags = ["http-server"]
 
 resource "null_resource" "configure-cat-app" {
   depends_on = [
@@ -104,4 +99,5 @@ resource "null_resource" "configure-cat-app" {
       host        = google_compute_instance.hashicat.network_interface.0.access_config.0.nat_ip
     }
   }
+}
 }
