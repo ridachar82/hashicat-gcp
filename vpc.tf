@@ -2,7 +2,7 @@
 module "gaurav-vpc-module" {
   source       = "../../"
   project_id   = var.project
-  network_name = gaurav
+
 
   subnets = [
     {
